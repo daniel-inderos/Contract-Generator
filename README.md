@@ -86,10 +86,6 @@ Before you begin, ensure you have met the following requirements:
 
 Contributions to the Contract Generator project are welcome. Please feel free to submit a Pull Request.
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## Disclaimer
 
 This application is for demonstration purposes only. The generated contracts should not be considered legally binding or used without review by a qualified legal professional.

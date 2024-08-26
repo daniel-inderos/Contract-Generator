@@ -10,6 +10,9 @@
     <div class="App">
         <h1>Contract Generator</h1>
         <div id="questionContainer">
+            <div id="progressIndicator">
+                <!-- Progress dots will be added dynamically -->
+            </div>
             <h2 id="question"></h2>
             <textarea id="answer" rows="4" cols="50"></textarea>
             <div>
@@ -21,8 +24,10 @@
         <div id="contractContainer" style="display: none;">
             <h2>Generated Contract:</h2>
             <pre id="contract"></pre>
+            <button id="downloadBtn" onclick="downloadPDF()">Download as PDF</button>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

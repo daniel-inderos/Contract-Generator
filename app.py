@@ -1,7 +1,8 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, send_file
 from dotenv import load_dotenv
 import os
 from openai import OpenAI
+import io
 
 load_dotenv()
 
@@ -29,6 +30,23 @@ def generate_contract():
     except Exception as e:
         print(f"Error: {str(e)}")
         return jsonify({"error": "An error occurred while generating the contract."}), 500
+
+@app.route('/download-pdf', methods=['POST'])
+def download_pdf():
+    contract_text = request.json['contract']
+    
+    # Here you would generate the PDF file
+    # For this example, we'll just return the text as a file
+    buffer = io.BytesIO()
+    buffer.write(contract_text.encode('utf-8'))
+    buffer.seek(0)
+    
+    return send_file(
+        buffer,
+        as_attachment=True,
+        download_name='generated_contract.pdf',
+        mimetype='application/pdf'
+    )
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -21,6 +21,18 @@ function updateQuestion() {
         document.getElementById('nextBtn').style.display = 'inline-block';
         document.getElementById('submitBtn').style.display = 'none';
     }
+    
+    updateProgressIndicator();
+}
+
+function updateProgressIndicator() {
+    const progressIndicator = document.getElementById('progressIndicator');
+    progressIndicator.innerHTML = '';
+    for (let i = 0; i < questions.length; i++) {
+        const dot = document.createElement('div');
+        dot.className = `progressDot ${i === currentQuestion ? 'active' : ''}`;
+        progressIndicator.appendChild(dot);
+    }
 }
 
 function handleNext() {
@@ -56,6 +68,18 @@ async function handleSubmit() {
     } catch (error) {
         console.error('Error generating contract:', error);
     }
+}
+
+function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    const contractText = document.getElementById('contract').textContent;
+    
+    doc.setFontSize(12);
+    const splitText = doc.splitTextToSize(contractText, 180);
+    doc.text(splitText, 15, 15);
+    
+    doc.save('generated_contract.pdf');
 }
 
 updateQuestion();

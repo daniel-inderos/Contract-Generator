@@ -35,8 +35,6 @@ def generate_contract():
 def download_pdf():
     contract_text = request.json['contract']
     
-    # Here you would generate the PDF file
-    # For this example, we'll just return the text as a file
     buffer = io.BytesIO()
     buffer.write(contract_text.encode('utf-8'))
     buffer.seek(0)

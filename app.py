@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import os
 from openai import OpenAI
 import io
+import json
 
 load_dotenv()
 
@@ -22,11 +23,18 @@ def generate_contract():
             model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant that generates contracts based on user input."},
-                {"role": "user", "content": f"Generate a contract based on the following information: {answers}"}
+                {"role": "user", "content": f"Generate a contract based on the following information: {answers}. Also, provide a suitable file name for this contract in JSON format."}
             ]
         )
-        contract = completion.choices[0].message.content
-        return jsonify({"contract": contract})
+        response = completion.choices[0].message.content
+        
+        # Split the response into contract and file name
+        contract, file_name_json = response.split('\n\n', 1)
+        
+        # Parse the JSON to get the file name
+        file_name = json.loads(file_name_json)['file_name']
+        
+        return jsonify({"contract": contract, "file_name": file_name})
     except Exception as e:
         print(f"Error: {str(e)}")
         return jsonify({"error": "An error occurred while generating the contract."}), 500

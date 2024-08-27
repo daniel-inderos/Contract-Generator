@@ -73,6 +73,9 @@ async function handleSubmit() {
         document.getElementById('contract').style.display = 'block';
         document.getElementById('downloadBtn').style.display = 'inline-block';
         document.getElementById('contract').textContent = data.contract;
+        
+        // Store the file name in a data attribute
+        document.getElementById('downloadBtn').setAttribute('data-filename', data.file_name);
     } catch (error) {
         console.error('Error generating contract:', error);
         document.getElementById('loadingIndicator').style.display = 'none';
@@ -90,7 +93,10 @@ function downloadPDF() {
     const splitText = doc.splitTextToSize(contractText, 180);
     doc.text(splitText, 15, 15);
     
-    doc.save('generated_contract.pdf');
+    // Get the generated file name from the data attribute
+    const fileName = document.getElementById('downloadBtn').getAttribute('data-filename') || 'generated_contract.pdf';
+    
+    doc.save(fileName);
 }
 
 updateQuestion();

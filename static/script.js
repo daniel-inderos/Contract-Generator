@@ -54,6 +54,12 @@ function handlePrevious() {
 async function handleSubmit() {
     answers[currentQuestion] = document.getElementById('answer').value;
     try {
+        document.getElementById('questionContainer').style.display = 'none';
+        document.getElementById('contractContainer').style.display = 'block';
+        document.getElementById('loadingIndicator').style.display = 'block';
+        document.getElementById('contract').style.display = 'none';
+        document.getElementById('downloadBtn').style.display = 'none';
+
         const response = await fetch('/generate-contract', {
             method: 'POST',
             headers: {
@@ -62,11 +68,16 @@ async function handleSubmit() {
             body: JSON.stringify({ answers }),
         });
         const data = await response.json();
-        document.getElementById('questionContainer').style.display = 'none';
-        document.getElementById('contractContainer').style.display = 'block';
+        
+        document.getElementById('loadingIndicator').style.display = 'none';
+        document.getElementById('contract').style.display = 'block';
+        document.getElementById('downloadBtn').style.display = 'inline-block';
         document.getElementById('contract').textContent = data.contract;
     } catch (error) {
         console.error('Error generating contract:', error);
+        document.getElementById('loadingIndicator').style.display = 'none';
+        document.getElementById('contract').style.display = 'block';
+        document.getElementById('contract').textContent = 'An error occurred while generating the contract. Please try again.';
     }
 }
 

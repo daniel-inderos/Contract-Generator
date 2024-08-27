@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contract Generator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="App">
@@ -23,6 +24,10 @@
         </div>
         <div id="contractContainer" style="display: none;">
             <h2>Generated Contract:</h2>
+            <div id="loadingIndicator" style="display: none;">
+                <p>Generating contract...</p>
+                <div class="spinner"></div>
+            </div>
             <pre id="contract"></pre>
             <button id="downloadBtn" onclick="downloadPDF()">Download as PDF</button>
         </div>

@@ -1,86 +1,59 @@
-# Contract Generator
+# Contract Generator (Client-Side)
 
-This is a web application that generates contracts based on user input using OpenAI's GPT model. The application is built with Python, Flask, and JavaScript.
+This is a **fully client-side** web application that generates contracts based on user input using OpenAI's GPT model. The application runs entirely in your browser using HTML, Tailwind CSS, and vanilla JavaScript. It requires the user to provide their own OpenAI API key, which is stored locally in the browser's `localStorage`.
+
+**Important Security Note:** Storing API keys in `localStorage` is convenient but **not secure for production environments**. The key is stored unencrypted and could potentially be accessed by malicious scripts or browser extensions. Use this application with the understanding that your API key is stored directly in your browser.
 
 ## Features
 
 - Interactive questionnaire for contract details
-- AI-powered contract generation using OpenAI's GPT model
-- Simple and intuitive user interface
-- PDF download functionality for generated contracts
+- AI-powered contract generation using OpenAI's GPT model (requires user's API key)
+- Simple and intuitive user interface styled with Tailwind CSS
+- Client-side PDF download functionality for generated contracts
+- API key is stored in browser `localStorage` for convenience
+- No backend required; runs entirely in the browser.
+- Easily deployable as a static website on platforms like Vercel, Netlify, GitHub Pages, etc.
 
 ## Prerequisites
 
-Before you begin, ensure you have met the following requirements:
-
-- Python 3.7+
-- pip (Python package manager)
+- A modern web browser (Chrome, Firefox, Safari, Edge, etc.)
 - An OpenAI API key
 
-## Setup Instructions
+## How to Use
 
-1. **Clone the repository**:
-   ```bash
-   git clone <repository-url>
-   cd contract-generator
-   ```
+1.  **Open `index.html`:** Simply open the `index.html` file directly in your web browser, or deploy the project folder to a static web host.
+2.  **Enter API Key:** When prompted, enter your OpenAI API key. Click "Save Key". The key will be stored in your browser's `localStorage` for future visits.
+3.  **Answer Questions:** Once the key is saved, the questionnaire will appear. Answer the questions presented.
+4.  **Generate Contract:** Click "Generate Contract" after answering all questions.
+5.  **View & Download:** View the AI-generated contract. Click "Download as PDF" to save it.
 
-2. **Create a Virtual Environment**:
-   ```bash
-   python -m venv venv
-   ```
+## Obtaining an OpenAI API Key
 
-3. **Activate the Virtual Environment**:
-   - On macOS/Linux:
-     ```bash
-     source venv/bin/activate
-     ```
-   - On Windows:
-     ```bash
-     venv\Scripts\activate
-     ```
+1.  Go to https://platform.openai.com/
+2.  Sign up or log in to your OpenAI account.
+3.  Navigate to the API keys section.
+4.  Create a new secret key.
+5.  Copy the key and paste it into the application when prompted.
 
-4. **Install Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+**Remember to keep your API key confidential.**
 
-5. **Set up environment variables**:
-   Create a `.env` file in the root directory and add your OpenAI API key:
-   ```
-   OPENAI_API_KEY=your_api_key_here
-   ```
+## Deployment (Static Hosting)
 
-   To obtain an OpenAI API key:
-   1. Go to https://platform.openai.com/
-   2. Sign up or log in to your OpenAI account
-   3. Navigate to the API keys section
-   4. Create a new secret key
-   5. Copy the key and paste it into your `.env` file
+You can deploy this project folder to any static web hosting service:
 
-   Note: Keep your API key confidential and never share it publicly.
+*   **Vercel/Netlify:** Connect your Git repository (GitHub, GitLab, etc.) and deploy. No special build configuration is needed.
+*   **GitHub Pages:** Enable GitHub Pages for your repository.
+*   **Other Hosts:** Upload the project files (`index.html`, `static/` folder) to your host.
 
-6. **Run the Application**:
-   ```bash
-   python app.py
-   ```
-
-## Usage
-
-1. Open a web browser and navigate to `http://127.0.0.1:5000/`
-2. Answer the questions presented in the interface.
-3. Click "Generate Contract" when you've completed all questions.
-4. View the AI-generated contract based on your inputs.
-5. Download the contract as a PDF if desired.
+No environment variables need to be set on the hosting platform, as the API key is managed client-side.
 
 ## Project Structure
 
-- `app.py`: Main Flask application file
-- `templates/index.html`: HTML template for the web interface
-- `static/style.css`: CSS styles for the web interface
-- `static/script.js`: JavaScript for handling user interactions
-- `.env`: Environment file for storing the OpenAI API key
-- `requirements.txt`: List of Python dependencies
+- `index.html`: Main HTML file with Tailwind CSS (via CDN) and structure.
+- `static/script.js`: JavaScript for handling API key storage, user interactions, direct OpenAI API calls, and client-side PDF generation.
+- `.gitignore`: Specifies intentionally untracked files that Git should ignore.
+- `.env.example`: (No longer functionally used, but kept for reference if needed)
+- `README.md`: This file.
 
 ## Contributing
 
@@ -88,4 +61,4 @@ Contributions to the Contract Generator project are welcome. Please feel free to
 
 ## Disclaimer
 
-This application is for demonstration purposes only. The generated contracts should not be considered legally binding or used without review by a qualified legal professional.
+This application is for demonstration purposes only. Storing API keys in the browser is insecure. The generated contracts should not be considered legally binding or used without review by a qualified legal professional.

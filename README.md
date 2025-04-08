@@ -37,16 +37,6 @@ This is a **fully client-side** web application that generates contracts based o
 
 **Remember to keep your API key confidential.**
 
-## Deployment (Static Hosting)
-
-You can deploy this project folder to any static web hosting service:
-
-*   **Vercel/Netlify:** Connect your Git repository (GitHub, GitLab, etc.) and deploy. No special build configuration is needed.
-*   **GitHub Pages:** Enable GitHub Pages for your repository.
-*   **Other Hosts:** Upload the project files (`index.html`, `static/` folder) to your host.
-
-No environment variables need to be set on the hosting platform, as the API key is managed client-side.
-
 ## Project Structure
 
 - `index.html`: Main HTML file with Tailwind CSS (via CDN) and structure.

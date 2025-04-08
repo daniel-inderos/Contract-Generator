@@ -109,6 +109,7 @@ async function handleSubmit() {
     document.getElementById('downloadBtn').style.display = 'none';
 
     const combinedAnswers = answers.map((ans, index) => `${questions[index]}\n${ans}`).join('\n\n');
+    const currentDate = new Date().toLocaleDateString('en-CA'); // Get date in YYYY-MM-DD format
 
     try {
         const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -120,8 +121,8 @@ async function handleSubmit() {
             body: JSON.stringify({
                 model: "gpt-4o-mini",
                 messages: [
-                    { role: "system", content: "You are a helpful assistant that generates contracts based on user input. Respond with the contract text first, followed by two newlines, then a JSON object containing the suggested filename like this: {\\\"file_name\\\": \\\"your_suggested_filename.txt\\\"}" },
-                    { role: "user", content: `Generate a contract based on the following information:\n\n${combinedAnswers}` }
+                    { role: "system", content: `You are a helpful assistant that generates contracts based on user input. Today's date is ${currentDate}. Ensure the generated contract is plain text ONLY, without any Markdown formatting (no bold, italics, headers, lists, etc.). Respond with the plain text contract first, followed by two newlines, then a JSON object containing the suggested filename like this: {\"file_name\": \"your_suggested_filename.txt\"}` },
+                    { role: "user", content: `Generate a contract based on the following information. Today's date is ${currentDate}. Ensure the output is plain text without Markdown.\n\n${combinedAnswers}` }
                 ]
             }),
         });
